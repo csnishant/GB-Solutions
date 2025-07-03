@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Productivity App</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <img src="https://cdn-icons-png.flaticon.com/512/7264/7264368.png" />
+      <h1>Productivity Dashboard</h1>
+      <p id="greeting"></p>
+      <p id="dateTime"></p>
+    </header>
+
+    <main class="dashboard">
+      <div class="card">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/008/916/127/original/multitasking-personal-productivity-a-multitasking-business-woman-at-a-laptop-busy-working-in-the-office-a-busy-girl-who-has-a-lot-of-hands-to-do-multiple-tasks-at-the-same-time-freelance-worker-vector.jpg"
+          alt="graphic"
+          class="card-img" />
+        <h2>Tasks Today</h2>
+        <p id="taskCount">0 Tasks</p>
+        <a href="todo.html">Go to Tasks →</a>
+      </div>
+
+      <div class="card">
+        <img
+          src="https://creativewebsitemarketing.com/wp-content/uploads/man-writing.png"
+          alt="graphic"
+          class="card-img" />
+        <h2>Your Notes</h2>
+        <p id="noteCount">0 Notes</p>
+        <a href="notes.html">Go to Notes →</a>
+      </div>
+    </main>
+
+    <!-- JS -->
+    <script src="./js/dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do</title>
+    <link rel="stylesheet" href="./css/todo.css" />
+  </head>
+  <body>
+    <header>
+      <h1>To-Do List</h1>
+      <a href="index.html" style="color: #00bfff">← Back to Dashboard</a>
+    </header>
+
+    
+    <main class="todo">
+      <div class="add-task">
+        <input type="text" id="taskInput" placeholder="Add your task here..." />
+        <input type="date" id="dateInput" />
+        <button id="addTaskBtn">Add Task</button>
+      </div>
+      <!-- filters -->
+      <div class="filters"></div>
+      <button data-filter="all" class="filter-btn active">All</button>
+      <button data-filter="pending" class="filter-btn">Pending</button>
+      <button data-filter="completed" class="filter-btn">Completed</button>
+
+      <!-- task list -->
+      <ul id="taskList" class="task-list"></ul>
+    </main>
+
+    <!-- JS -->
+    <script src="./js/todo.js"></script>
+  </body>
+</html>
