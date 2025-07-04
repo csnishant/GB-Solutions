@@ -9,11 +9,43 @@
   <body>
     <!-- Header -->
     <header>
-      <img src="https://cdn-icons-png.flaticon.com/512/7264/7264368.png" />
-      <h1>Productivity Dashboard</h1>
-      <p id="greeting"></p>
-      <p id="dateTime"></p>
+      <div class="header-left">
+        <img
+          class="img"
+          src="https://cdn-icons-png.flaticon.com/512/7264/7264368.png"
+          alt="dashboard logo" />
+        <h1>Productivity Dashboard</h1>
+      </div>
+
+      <div class="header-right">
+        <p id="greeting"></p>
+        <p id="dateTime"></p>
+      </div>
     </header>
+
+    <section>
+      <div class="extras">
+        <h2>Quote of the Day</h2>
+        <p>
+          "Productivity is never an accident. It is always the result of a
+          commitment to excellence."
+        </p>
+        <span style="color: var(--gray-medium); font-size: 0.85rem"
+          >— Paul J. Meyer</span
+        >
+      </div>
+
+      <div class="card">
+        <h2>Weekly Progress</h2>
+        <p>✔️ 12 / 20 Tasks Done</p>
+        <progress value="60" max="100"></progress>
+      </div>
+
+      <div class="card">
+        <h2>Today's Focus</h2>
+        <p>Complete portfolio case study</p>
+      </div>
+    </section>
 
     <main class="dashboard">
       <div class="card">
@@ -35,9 +67,22 @@
         <p id="noteCount">0 Notes</p>
         <a href="notes.html">Go to Notes →</a>
       </div>
+
+      <div class="card">
+        <h2>Upcoming Reminders</h2>
+        <ul class="reminder-list">
+          <li>Submit project report - 5:00 PM</li>
+          <li>Call with mentor - Tomorrow</li>
+        </ul>
+        <a href="todo.html">View All →</a>
+      </div>
     </main>
 
     <!-- JS -->
     <script src="./js/dashboard.js"></script>
+
+    <footer>
+      <p>&copy; 2025 Productivity App | All rights reserved.</p>
+    </footer>
   </body>
 </html>
