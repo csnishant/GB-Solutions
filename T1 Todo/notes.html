@@ -1,35 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Notes | Productivity App</title>
-  <link rel="stylesheet" href="./css/notes.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes | Productivity App</title>
+    <link rel="stylesheet" href="./css/notes.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Notes</h1>
+      <a href="index.html" style="color: #00bfff">← Back to Dashboard</a>
+    </header>
 
-  <!-- Header -->
-  <header>
-    <h1>Notes</h1>
-    <a href="index.html" style="color:#00bfff;">← Back to Dashboard</a>
-  </header>
+    <!-- Main Notes Section -->
+    <main class="notes">
+      <!-- Add Note -->
+      <form action="">
+        <div class="add-note">
+          <label>Title</label>
+          <input type="text" id="noteTitle" placeholder="Note Title" />
+          <label>Choose Category</label>
+          <select id="noteCategory">
+            <option value="">Select category</option>
+            <option value="Personal">Personal</option>
+            <option value="Work">Work</option>
+            <option value="Academic">Academic</option>
+          </select>
+          <label>Notes</label>
+          <textarea
+            id="noteContent"
+            rows="5"
+            placeholder="Write your note..."></textarea>
+          <p id="wordCounter">Words: 0 | Characters: 0</p>
+          <button type="submit" id="addNoteBtn">Add Note</button>
+        </div>
+      </form>
 
-  <!-- Main Notes Section -->
-  <main class="notes">
+      <!-- Category Filter -->
 
-    <!-- Add Note -->
-    <div class="add-note">
-      <input type="text" id="noteTitle" placeholder="Note Title">
-      <textarea id="noteContent" rows="5" placeholder="Write your note..."></textarea>
-      <p id="wordCounter">Words: 0 | Characters: 0</p>
-      <button id="addNoteBtn">Add Note</button>
-    </div>
+      <div class="custom-dropdown">
+        <button id="dropdownButton">All</button>
+        <ul id="dropdownOptions" class="dropdown-options">
+          <li data-value="All" style="background-color: #f1f5f9">All</li>
+          <li data-value="Personal" style="background-color: #ffe0e0">
+            Personal
+          </li>
+          <li data-value="Work" style="background-color: #e0f7ff">Work</li>
+          <li data-value="Academic" style="background-color: #e6ffe0">
+            Academic
+          </li>
+        </ul>
+      </div>
 
-    <!-- Notes List -->
-    <div id="notesContainer" class="notes-container"></div>
-  </main>
-]
-  <!-- JS -->
-  <script src="./js/notes.js"></script>
-</body>
+      <!-- Notes Display -->
+      <div id="notesContainer" class="notes-container"></div>
+
+      <!-- Edit Modal -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" id="closeModal">&times;</span>
+          <h2>Edit Note</h2>
+          <label>Title</label>
+          <input type="text" id="modalTitle" />
+
+          <label>Category</label>
+          <select id="modalCategory">
+            <option value="Personal">Personal</option>
+            <option value="Work">Work</option>
+            <option value="Academic">Academic</option>
+          </select>
+
+          <label>Content</label>
+          <textarea id="modalContent" rows="4"></textarea>
+
+          <div class="note-actions">
+            <button class="m-btn" id="saveModalBtn">Save</button>
+            <button class="m-btn" id="cancelModalBtn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JS -->
+    <script src="./js/notes.js"></script>
+  </body>
 </html>
