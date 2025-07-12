@@ -1,53 +1,197 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+ body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+     background: #f2f2f7;
+     color: #1c1c1e;
+ }
 
-.container {
-    background-color: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 350px;
-}
+ .welcome-msg {
+     text-align: center;
+     font-size: 22px;
+     font-weight: 600;
+     padding: 20px 0;
+     margin: 0;
+     background-color: #ffffff;
+     color: #1c1c1e;
+     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+     border-radius: 12px;
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+ }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
+ .logout-link {
+     display: block;
+     text-align: center;
+     margin-top: 5px;
+     color: #007aff;
+     text-decoration: none;
+     font-weight: 500;
+ }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+ .logout-link:hover {
+     text-decoration: underline;
+ }
 
-button {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-}
+ h2,
+ .table th {
+     font-weight: 600;
+ }
 
-button:hover {
-    background-color: #45a049;
-}
+ a.btn {
+     border-radius: 12px;
+     padding: 8px 16px;
+     font-size: 14px;
+     transition: all 0.3s;
+ }
 
-.link {
-    text-align: center;
-    margin-top: 10px;
-}
+ .btn-primary {
+     background-color: #007aff;
+     border-color: #007aff;
+ }
+
+ .btn-warning {
+     background-color: #ff9f0a;
+     border: none;
+     color: white;
+ }
+
+ .btn-danger {
+     background-color: #ff3b30;
+     border: none;
+     color: white;
+ }
+
+ .btn:hover {
+     opacity: 0.85;
+ }
+
+ .table {
+     border-radius: 16px;
+     overflow: hidden;
+     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+ }
+
+ .table th,
+ .table td {
+     vertical-align: middle;
+ }
+
+ .table th {
+     background-color: #1c1c1e;
+     color: white;
+ }
+
+ .welcome {
+     text-align: center;
+     padding: 10px 0;
+     font-size: 18px;
+     background: white;
+     margin: 0;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+ }
+
+ .logout {
+     position: absolute;
+     top: 10px;
+     right: 20px;
+     color: #007aff;
+     text-decoration: none;
+     font-weight: 500;
+ }
+
+ .logout:hover {
+     text-decoration: underline;
+ }
+
+ /* Login signup */
+ /* basic reset */
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ /* body styling */
+ body {
+     background-color: #f2f2f7;
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+ }
+
+ /* container box */
+ .container {
+     background-color: #ffffff;
+     padding: 30px 25px;
+     border-radius: 16px;
+     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+     width: 100%;
+     max-width: 400px;
+ }
+
+ /* heading */
+ .container h2 {
+     text-align: center;
+     margin-bottom: 20px;
+     color: #1c1c1e;
+     font-size: 24px;
+     font-weight: 600;
+ }
+
+ /* form input fields */
+ form input {
+     width: 100%;
+     padding: 12px 14px;
+     margin-bottom: 16px;
+     border: 1px solid #d1d1d6;
+     border-radius: 12px;
+     background-color: #f9f9f9;
+     font-size: 15px;
+     transition: 0.3s;
+ }
+
+ form input:focus {
+     outline: none;
+     border-color: #007aff;
+     background-color: #ffffff;
+ }
+
+ /* submit button */
+ button[type="submit"] {
+     width: 100%;
+     padding: 12px;
+     background-color: #007aff;
+     color: white;
+     border: none;
+     border-radius: 12px;
+     font-size: 16px;
+     font-weight: 500;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+ button[type="submit"]:hover {
+     background-color: #005ecb;
+ }
+
+ /* error or success message */
+ p {
+     font-size: 14px;
+     margin-bottom: 16px;
+ }
+
+ /* link below form */
+ .link {
+     text-align: center;
+     margin-top: 10px;
+ }
+
+ .link a {
+     color: #007aff;
+     text-decoration: none;
+     font-size: 14px;
+ }
+
+ .link a:hover {
+     text-decoration: underline;
+ }
