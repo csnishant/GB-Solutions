@@ -78,6 +78,19 @@ header h1 {
     margin-top: 0.5rem;
 }
 
+
+.hero {
+    background-color: #cfccff;
+    text-shadow: #10b981;
+    color: black;
+    padding: 2rem 1.5rem;
+    border-radius: 50px;
+    border-color: #818cf8;
+    border-style: dotted;
+    
+    
+}
+
 /* layout for extra cards inside section */
 section {
     display: grid;
