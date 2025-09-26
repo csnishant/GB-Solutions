@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products & Categories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- Categories Section -->
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Categories</h2>
+    <div class="flex overflow-x-auto space-x-4 pb-2 mb-8">
+        <!-- Static Categories -->
+        <div class="flex-shrink-0 w-32 h-32 bg-white rounded-xl shadow-md p-4 flex items-center justify-center text-center hover:scale-105 transform transition cursor-pointer">
+            <span class="font-medium text-gray-700">Electronics</span>
+        </div>
+        <div class="flex-shrink-0 w-32 h-32 bg-white rounded-xl shadow-md p-4 flex items-center justify-center text-center hover:scale-105 transform transition cursor-pointer">
+            <span class="font-medium text-gray-700">Clothing</span>
+        </div>
+        <div class="flex-shrink-0 w-32 h-32 bg-white rounded-xl shadow-md p-4 flex items-center justify-center text-center hover:scale-105 transform transition cursor-pointer">
+            <span class="font-medium text-gray-700">Books</span>
+        </div>
+        <div class="flex-shrink-0 w-32 h-32 bg-white rounded-xl shadow-md p-4 flex items-center justify-center text-center hover:scale-105 transform transition cursor-pointer">
+            <span class="font-medium text-gray-700">Home</span>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Static Product Card -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer flex flex-col product-card">
+            <img src="https://via.placeholder.com/300x200" alt="Laptop" class="h-48 w-full object-cover">
+            <div class="p-4 flex flex-col flex-grow">
+                <h3 class="font-semibold text-lg text-gray-800">Laptop</h3>
+                <p class="text-gray-500 text-sm mt-1 flex-grow">High performance laptop for work and gaming.</p>
+                <div class="mt-2 flex justify-between items-center">
+                    <span class="font-bold text-green-600">$1200</span>
+                    <button class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition text-sm add-to-cart">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer flex flex-col product-card">
+            <img src="https://via.placeholder.com/300x200" alt="T-Shirt" class="h-48 w-full object-cover">
+            <div class="p-4 flex flex-col flex-grow">
+                <h3 class="font-semibold text-lg text-gray-800">T-Shirt</h3>
+                <p class="text-gray-500 text-sm mt-1 flex-grow">Comfortable cotton t-shirt for daily wear.</p>
+                <div class="mt-2 flex justify-between items-center">
+                    <span class="font-bold text-green-600">$25</span>
+                    <button class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition text-sm add-to-cart">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer flex flex-col product-card">
+            <img src="https://via.placeholder.com/300x200" alt="Book" class="h-48 w-full object-cover">
+            <div class="p-4 flex flex-col flex-grow">
+                <h3 class="font-semibold text-lg text-gray-800">Book</h3>
+                <p class="text-gray-500 text-sm mt-1 flex-grow">Interesting book to expand your knowledge.</p>
+                <div class="mt-2 flex justify-between items-center">
+                    <span class="font-bold text-green-600">$15</span>
+                    <button class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition text-sm add-to-cart">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer flex flex-col product-card">
+            <img src="https://via.placeholder.com/300x200" alt="Chair" class="h-48 w-full object-cover">
+            <div class="p-4 flex flex-col flex-grow">
+                <h3 class="font-semibold text-lg text-gray-800">Chair</h3>
+                <p class="text-gray-500 text-sm mt-1 flex-grow">Comfortable office chair for home or office.</p>
+                <div class="mt-2 flex justify-between items-center">
+                    <span class="font-bold text-green-600">$80</span>
+                    <button class="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition text-sm add-to-cart">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Badge -->
+<div class="fixed top-4 right-4">
+    <button class="relative bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-900 transition">
+        Cart
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">0</span>
+    </button>
+</div>
+
+<!-- JS to Update Cart Badge -->
+<script>
+    const cartCount = document.getElementById('cart-count');
+    let count = 0;
+
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+            count++;
+            cartCount.textContent = count;
+        });
+    });
+</script>
+
+</body>
+</html>
