@@ -9,6 +9,26 @@ use App\Models\Category;
 class ProductController extends Controller {
     // Show product details
 
+    public function home( Request $request ) {
+        $categories = Category::all();
+
+        $query = Product::query();
+
+        // Filter by search
+        if ( $request->filled( 'search' ) ) {
+            $query->where( 'name', 'like', '%' . $request->search . '%' );
+        }
+
+        // Filter by category
+        if ( $request->filled( 'category' ) ) {
+            $query->where( 'category_id', $request->category );
+        }
+
+        $products = $query->get();
+
+        return view( 'customer.home', compact( 'products', 'categories' ) );
+    }
+
     public function show( $id ) {
         $product = Product::findOrFail( $id );
         return view( 'product', [ 'product' => $product ] );

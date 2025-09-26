@@ -3,87 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grocery Store - Dark Mode</title>
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header { padding: 20px; text-align: center; background-color: #111; position: relative; }
-        header h1 { font-size: 2.5rem; margin: 0; }
-        header p { margin-top: 5px; color: #aaa; }
-        .logout-btn {
-            position: absolute;
-            right: 20px;
-            top: 25px;
-            background-color: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .logout-btn:hover { background-color: #c0392b; }
-
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
-        h2 { margin-top: 40px; margin-bottom: 20px; font-size: 1.8rem; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .categories, .products { display: flex; flex-wrap: wrap; gap: 20px; }
-        .category-card, .product-card { background-color: #222; padding: 15px; border-radius: 8px; text-align: center; flex: 1 1 200px; min-width: 200px; }
-        .category-card:hover, .product-card:hover { background-color: #333; }
-        .product-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; }
-        .btn { display: inline-block; padding: 8px 12px; margin-top: 10px; background-color: #4caf50; color: #fff; text-decoration: none; border-radius: 5px; cursor: pointer; }
-        .btn:hover { background-color: #45a049; }
-        footer { text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #333; color: #aaa; }
-
-        @media (max-width: 768px) { .categories, .products { flex-direction: column; } }
-    </style>
+    <title>Grocery Store - Customer Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 font-sans">
 
-<header>
-    <h1>Grocery Store</h1>
-    <p>Fresh products delivered to your door!</p>
+<header class="bg-white sticky top-0 z-50 shadow px-4 py-3 flex flex-col items-center">
+    <h1 class="text-2xl font-bold text-gray-800">Grocery Store</h1>
+    <p class="text-sm text-gray-500">Fresh products delivered to your door!</p>
 
-    @auth
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button class="logout-btn" type="submit">Logout</button>
-        </form>
-    @endauth
+    <!-- Search + Category Filter -->
+    <form method="GET" action="{{ route('customer.home') }}" class="w-full mt-3 flex gap-2">
+        <input type="text" name="search" placeholder="Search products..." 
+               value="{{ request('search') }}"
+               class="flex-1 px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+        <select name="category" class="px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400">
+            <option value="">All</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+        <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600">Go</button>
+    </form>
 </header>
 
-<div class="container">
-    <!-- Categories -->
-    <section>
-        <h2>Categories</h2>
-        <div class="categories">
-            @foreach($categories as $category)
-                <div class="category-card">{{ $category->name }}</div>
-            @endforeach
-        </div>
-    </section>
+<main class="p-4">
+    <!-- Category Chips -->
+    <div class="flex overflow-x-auto gap-3 py-3">
+        @foreach($categories as $category)
+            <a href="{{ route('customer.home', ['category' => $category->id]) }}"
+               class="flex-none px-4 py-2 bg-white rounded-full shadow hover:bg-green-100
+                      {{ request('category') == $category->id ? 'bg-green-500 text-white' : '' }}">
+                {{ $category->name }}
+            </a>
+        @endforeach
+    </div>
 
-    <!-- Featured Products -->
-    <section>
-        <h2>Featured Products</h2>
-        <div class="products">
-            @foreach($products as $product)
-                <div class="product-card">
-                    <img src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/150' }}" alt="{{ $product->name }}">
-                    <h3>{{ $product->name }}</h3>
-                    <p>₹{{ $product->price }} {{ $product->category ? '/ ' . $product->category->name : '' }}</p>
-                    <a class="btn">Add to Cart</a>
+    <!-- Products Grid -->
+    <div class="grid grid-cols-2 gap-4 mt-4">
+        @foreach($products as $product)
+            <div class="bg-white rounded-xl shadow p-3 flex flex-col">
+                <img src="{{ $product->image ? asset('storage/' . $product->image) : 'https://via.placeholder.com/150' }}" 
+                     alt="{{ $product->name }}" class="w-full h-32 object-cover rounded-lg mb-2">
+                <h3 class="font-semibold text-gray-800 text-sm">{{ $product->name }}</h3>
+                <p class="text-gray-500 text-xs mt-1">{{ $product->category?->name ?? 'No Category' }}</p>
+                <div class="mt-auto flex justify-between items-center">
+                    <span class="text-green-600 font-bold">₹{{ $product->price }}</span>
+                    <button class="px-2 py-1 bg-green-500 text-white rounded-md text-xs hover:bg-green-600">Add</button>
                 </div>
-            @endforeach
-        </div>
-    </section>
-</div>
+            </div>
+        @endforeach
+    </div>
+</main>
 
-<footer>
-    &copy; 2025 Grocery Store. All rights reserved.
+<footer class="mt-6 text-center text-gray-500 text-xs pb-4">
+    &copy; 2025 Grocery Store
 </footer>
 
 </body>
