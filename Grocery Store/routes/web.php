@@ -15,9 +15,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Customer Home
 Route::get('/customer/home', [HomeController::class, 'index'])->name('customer.home');
+// web.php
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
 
-//admin routes
+
 // Admin routes
 Route::middleware(['auth'])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');

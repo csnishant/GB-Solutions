@@ -9,12 +9,13 @@ use App\Models\Category;
 class ProductController extends Controller {
     // Show product details
 
-    public function home( Request $request ) {
-        $categories = Category::all();
+    // ProductController.php
 
+    public function search( Request $request ) {
+        $categories = Category::all();
         $query = Product::query();
 
-        // Filter by search
+        // Search by name
         if ( $request->filled( 'search' ) ) {
             $query->where( 'name', 'like', '%' . $request->search . '%' );
         }
@@ -26,7 +27,7 @@ class ProductController extends Controller {
 
         $products = $query->get();
 
-        return view( 'customer.home', compact( 'products', 'categories' ) );
+        return view( 'products.search-results', compact( 'products', 'categories', 'request' ) );
     }
 
     public function show( $id ) {
