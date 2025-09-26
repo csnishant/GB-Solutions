@@ -1,54 +1,52 @@
 <?php
+
 namespace App\Http\Controllers;
-use App\Models\Product;
+
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
+    // Show product details
     public function show($id) {
         $product = Product::findOrFail($id);
         return view('product', ['product' => $product]);
     }
 
+    // Products by category
     public function byCategory($id) {
         $products = Product::where('category_id', $id)->get();
         return view('products', ['products' => $products]);
     }
 
-    // Show form
-public function create() {
-    $categories = \App\Models\Category::all();
-    return view('create_product', ['categories' => $categories]);
-}
-
-// Store product
-public function store(Request $request) {
-    $request->validate([
-        'name' => 'required',
-        'price' => 'required|numeric',
-        'category_id' => 'required',
-        'image' => 'nullable|image|max:2048'
-    ]);
-
-    $data = $request->only(['name','price','category_id']);
-
-    // Handle image upload
-    if($request->hasFile('image')) {
-        $file = $request->file('image');
-        $filename = time().'_'.$file->getClientOriginalName();
-        $file->move(public_path('uploads'), $filename);
-        $data['image'] = $filename;
+    // Show create product form
+    public function create() {
+        $categories = Category::all();
+        return view('create_product', ['categories' => $categories]);
     }
 
-    \App\Models\Product::create($data);
+    // Store product
+    public function store(Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|max:2048'
+        ]);
 
-    return redirect('/')->with('success','Product added successfully!');
-}
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+        }
 
+        Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'image' => $imagePath
+        ]);
 
-
-
-
-
-
+        return redirect('/')->with('success', 'Product added successfully!');
+    }
 }

@@ -11,7 +11,7 @@ class AdminController extends Controller
     // Dashboard view
     public function dashboard() {
         $categories = Category::all();
-        $products = Product::with('category')->get(); // Category ke saath load karein
+        $products = Product::with('category')->get();
         return view('admin.dashboard', compact('categories', 'products'));
     }
 
@@ -38,6 +38,7 @@ class AdminController extends Controller
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products', 'public');
+
         }
 
         Product::create([

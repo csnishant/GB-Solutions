@@ -49,19 +49,20 @@
     <!-- Add Product -->
     <div class="form-section">
         <h2>Add Product</h2>
-        <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
-            @csrf
-            <input type="text" name="name" placeholder="Product Name" required>
-            <input type="number" name="price" placeholder="Price" required>
-            <input type="file" name="image" accept="image/*">
-            <select name="category_id" required>
-                <option value="">Select Category</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-            <button class="btn" type="submit">Add Product</button>
-        </form>
+       <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
+    @csrf
+    <input type="text" name="name" placeholder="Product Name" required>
+    <input type="number" name="price" placeholder="Price" required>
+    <input type="file" name="image" accept="image/*">
+    <select name="category_id" required>
+        <option value="">Select Category</option>
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+    </select>
+    <button type="submit">Add Product</button>
+</form>
+
 
         <div class="products-list">
             <h3>Existing Products</h3>
