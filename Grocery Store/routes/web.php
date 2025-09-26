@@ -18,11 +18,20 @@ Route::get('/customer/home', [HomeController::class, 'index'])->name('customer.h
 
 
 //admin routes
+// Admin routes
 Route::middleware(['auth'])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Category
     Route::post('/admin/category/store', [AdminController::class, 'storeCategory'])->name('admin.category.store');
+
+    // Product
     Route::post('/admin/product/store', [AdminController::class, 'storeProduct'])->name('admin.product.store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit']);
+    Route::put('/product/update/{id}', [ProductController::class, 'update']);
+    Route::delete('/product/delete/{id}', [ProductController::class, 'destroy']);
 });
+
 
 Route::get('/', [CategoryController::class, 'index']);
 

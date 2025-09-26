@@ -1,77 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <style>
-        body { background-color:#1a1a1a; color:#f0f0f0; font-family: Arial,sans-serif; margin:0; padding:0; }
-        header { padding:20px; text-align:center; background-color:#111; }
-        header h1 { margin:0; font-size:2rem; }
-        .container { max-width:1200px; margin:auto; padding:20px; }
-        .form-section { background-color:#222; padding:20px; border-radius:8px; margin-bottom:30px; }
-        input, select { width:100%; padding:8px; margin:10px 0; border-radius:5px; border:none; }
-        .btn { background-color:#4caf50; color:#fff; padding:10px 15px; border:none; border-radius:5px; cursor:pointer; }
-        .btn:hover { background-color:#45a049; }
-        h2 { margin-top:0; }
-        .success { color:#0f0; }
-        .products-list, .categories-list { margin-top:20px; }
-        .item { background-color:#333; padding:10px; margin-bottom:10px; border-radius:5px; }
-    </style>
-</head>
-<body>
-<header>
-    <h1>Admin Dashboard</h1>
-</header>
-<div class="container">
+@extends('layouts.app')
 
-    @if(session('success'))
-        <p class="success">{{ session('success') }}</p>
-    @endif
+@section('content')
+<div class="flex flex-col md:flex-row gap-6">
 
-    <!-- Add Category -->
-    <div class="form-section">
-        <h2>Add Category</h2>
-        <form method="POST" action="{{ route('admin.category.store') }}">
+    <!-- Category Card -->
+    <div class="w-full md:w-1/3 bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition">
+        <h2 class="text-xl font-semibold mb-4 text-center">Add Category</h2>
+        <form method="POST" action="{{ route('admin.category.store') }}" class="flex flex-col gap-3">
             @csrf
-            <input type="text" name="name" placeholder="Category Name" required>
-            <button class="btn" type="submit">Add Category</button>
+            <input type="text" name="name" placeholder="Category Name" class="border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">Add Category</button>
         </form>
-
-        <div class="categories-list">
-            <h3>Existing Categories</h3>
-            @foreach($categories as $category)
-                <div class="item">{{ $category->name }}</div>
-            @endforeach
-        </div>
     </div>
 
-    <!-- Add Product -->
-    <div class="form-section">
-        <h2>Add Product</h2>
-       <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
-    @csrf
-    <input type="text" name="name" placeholder="Product Name" required>
-    <input type="number" name="price" placeholder="Price" required>
-    <input type="file" name="image" accept="image/*">
-    <select name="category_id" required>
-        <option value="">Select Category</option>
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
-        @endforeach
-    </select>
-    <button type="submit">Add Product</button>
-</form>
-
-
-        <div class="products-list">
-            <h3>Existing Products</h3>
-            @foreach($products as $product)
-                <div class="item">{{ $product->name }} - ₹{{ $product->price }} - {{ $product->category->name ?? '' }}</div>
-            @endforeach
-        </div>
+    <!-- Product Card -->
+    <div class="w-full md:w-2/3 bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition">
+        <h2 class="text-xl font-semibold mb-4 text-center">Add Product</h2>
+        <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data" class="flex flex-col gap-3">
+            @csrf
+            <input type="text" name="name" placeholder="Product Name" class="border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-green-400 focus:outline-none" required>
+            <input type="number" name="price" placeholder="Price" class="border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-green-400 focus:outline-none" required>
+            <input type="file" name="image" accept="image/*" class="border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-green-400 focus:outline-none">
+            <select name="category_id" class="border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-green-400 focus:outline-none" required>
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-xl hover:bg-green-700 transition">Add Product</button>
+        </form>
     </div>
-
 </div>
-</body>
-</html>
+
+<!-- Products Table -->
+<div class="mt-8">
+    <h2 class="text-xl font-semibold mb-4 text-center">All Products</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        @foreach($products as $product)
+        <div class="bg-white rounded-2xl shadow-xl p-4 hover:shadow-2xl transition flex flex-col items-center">
+            @if($product->image)
+                <img src="{{ asset('storage/'.$product->image) }}" alt="Product Image" class="w-32 h-32 object-cover rounded-xl mb-3">
+            @else
+                <div class="w-32 h-32 bg-gray-100 flex items-center justify-center rounded-xl mb-3 text-gray-400">No Image</div>
+            @endif
+            <h3 class="font-semibold text-lg">{{ $product->name }}</h3>
+            <p class="text-gray-500">${{ $product->price }}</p>
+            <p class="text-gray-400 text-sm">{{ $product->category->name ?? '-' }}</p>
+
+            <div class="flex gap-3 mt-3">
+                <a href="{{ url('/product/edit/'.$product->id) }}" class="bg-blue-500 text-white px-3 py-1 rounded-xl hover:bg-blue-600 transition text-sm">Edit</a>
+                <form method="POST" action="{{ url('/product/delete/'.$product->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-xl hover:bg-red-600 transition text-sm">Delete</button>
+                </form>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+@endsection
