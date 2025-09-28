@@ -4,6 +4,20 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
+
+
+use App\Http\Controllers\CartController;
+
+// Cart
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/order', [CartController::class, 'placeOrder'])->name('cart.order');
+Route::middleware('auth')->group(function() {
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+});
+
 
 // Login/Register
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
